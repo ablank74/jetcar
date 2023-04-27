@@ -79,7 +79,13 @@ RUN mkdir ros_catkin_ws && \
 
 
 WORKDIR /
+
+#install base packages to reduce config time
 RUN pip3 install matplotlib
+RUN pip3 install pandas
+RUN pip3 install cartographer
+RUN pip3 install rplidar
+
 RUN apt-get update && apt-get install -y build-essential libffi-dev python3-dev
 # Install Jupyter
 RUN pip3 install packaging
