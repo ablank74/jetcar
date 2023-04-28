@@ -1,0 +1,1 @@
+docker run -d -p 8888:8888 -v /home/jetson/jetcar/notebooks:/notebooks my_jetcar

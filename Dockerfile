@@ -28,6 +28,7 @@ RUN apt-get clean && \
 RUN apt-get update && apt-get install -y \
     libboost-all-dev \
     libusb-1.0-0-dev \
+    catkin \
     libudev-dev
 
 #
@@ -50,7 +51,7 @@ RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt
 #
 # install bootstrap dependencies
 #
-RUN  apt-get update && apt-get install -y --no-install-recommends \
+RUN  apt-get update && apt-get install -y \
           libpython3-dev \
           python3-rosdep \
           python3-rosinstall-generator \
@@ -77,6 +78,13 @@ RUN mkdir ros_catkin_ws && \
     rm -rf /var/lib/apt/lists/*
 
 
+RUN apt-get install cmake \
+    python-catkin-pkg \
+    python-empy \
+    python-nose \
+    python-setuptools \
+    libgtest-dev \
+    build-essential
 
 WORKDIR /
 
@@ -86,11 +94,17 @@ RUN pip3 install pandas
 RUN pip3 install cartographer
 RUN pip3 install rplidar
 
-RUN apt-get update && apt-get install -y build-essential libffi-dev python3-dev
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libffi-dev \
+    python3-dev\
+    python-roslib \
+    python-rospy 
+
 # Install Jupyter
 RUN pip3 install packaging
 
-RUN pip3 install jupyterlab
+RUN pip3 install jupyter
 
 # Expose port for Jupyter
 EXPOSE 8888
@@ -101,5 +115,5 @@ ENV ROS_PACKAGE_PATH /catkin_ws/src:$ROS_PACKAGE_PATH
 ENV LD_LIBRARY_PATH /rplidar_ros/devel/lib:$LD_LIBRARY_PATH
 
 # Set default command to launch RPILidar driver node
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root" "--NotebookApp.token=''"]
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''"]
 
