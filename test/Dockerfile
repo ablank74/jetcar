@@ -26,23 +26,13 @@ RUN apt-get update && apt-get install -y ninja-build python3-matplotlib
 RUN apt-get update && apt-get install -y \
     python3-opencv
 
-RUN apt-get update && apt-get install -y python3-smbus i2c-tools 
+RUN apt-get update && apt-get install -y python3-smbus i2c-tools
 RUN pip3 install adafruit-circuitpython-pca9685
 
 RUN export PATH="/opt/ros/noetic/bin/roscore:$PATH" 
 
 RUN pip3 install rplidar-roboticia \
     rplidar
-
-RUN apt-get update && apt-get install -y python-catkin-tools
-
-RUN mkdir your_ros_workspace
-RUN mkdir your_ros_workspace/src 
-RUN cd your_ros_workspace/src && git clone https://github.com/Slamtec/rplidar_ros.git
-RUN cd your_ros_workspace && catkin_make && source devel/setup.bash
-
-
- 
 
 # Copy the Jupyter configuration file
 COPY jupyter_notebook_config.py /root/.jupyter/
