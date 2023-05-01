@@ -31,8 +31,7 @@ RUN pip3 install adafruit-circuitpython-pca9685
 
 RUN export PATH="/opt/ros/noetic/bin/roscore:$PATH" 
 
-RUN pip3 install rplidar-roboticia \
-    rplidar
+RUN pip3 install rplidar-roboticia
 
 # Copy the Jupyter configuration file
 COPY jupyter_notebook_config.py /root/.jupyter/
