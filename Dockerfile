@@ -20,7 +20,8 @@ RUN pip3 install --upgrade pip
 #5
 RUN pip3 install \
     scikit-build \
-    numpy
+    numpy \
+    flask
 
 # Install Python dependencies
 #6
