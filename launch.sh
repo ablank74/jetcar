@@ -19,4 +19,3 @@ else
 fi
 
 docker run -it --rm --device=/dev/ttyUSB0:/dev/ttyUSB0 --device=/dev/video0:/dev/video0 -p 8888:8888 -p 5000:5000 -v ~jetcar/notebooks:/root/notebooks test_car
-#
