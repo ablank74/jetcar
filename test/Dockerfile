@@ -14,24 +14,37 @@ RUN apt-get update && apt-get install -y \
 
 
 RUN pip3 install --upgrade pip
-RUN pip3 install scikit-build
+RUN pip3 install \
+    scikit-build
 
 # Install Python dependencies
 RUN pip3 install \
     jupyter \
     jupyterlab
 
-RUN apt-get update && apt-get install -y ninja-build python3-matplotlib
+RUN apt-get update && apt-get install -y \
+    ninja-build \
+    python3-matplotlib
+
+#RUN apt-get update && apt-get install -y \
+#    python3-opencv
+
+RUN pip3 install \
+    torch \
+    torchvision \
+    opencv-python-headless
 
 RUN apt-get update && apt-get install -y \
-    python3-opencv
+    python3-smbus \
+    i2c-tools
 
-RUN apt-get update && apt-get install -y python3-smbus i2c-tools
-RUN pip3 install adafruit-circuitpython-pca9685
+RUN pip3 install \
+    adafruit-circuitpython-pca9685
 
 RUN export PATH="/opt/ros/noetic/bin/roscore:$PATH" 
 
-RUN pip3 install rplidar-roboticia
+RUN pip3 install \
+    rplidar-roboticia
 
 # Copy the Jupyter configuration file
 COPY jupyter_notebook_config.py /root/.jupyter/
